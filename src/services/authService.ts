@@ -30,6 +30,25 @@ class AuthService {
             .single();
 
         if (error || !profile) {
+            // Failsafe for the master admin: If RLS blocked creation or it's missing,
+            // we force a local admin profile if the email matches.
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user?.email?.toLowerCase().trim() === 'eduzribeiro@gmail.com' && session.user.id === userId) {
+                return {
+                    id: userId,
+                    email: 'eduzribeiro@gmail.com',
+                    role: 'admin',
+                    shop_id: null,
+                    status: 'active',
+                    createdAt: session.user.created_at || new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                    profile: {
+                        userId: userId,
+                        name: session.user.user_metadata?.name || 'Administrador Master',
+                    }
+                };
+            }
+
             console.error('AuthService: Erro ao buscar perfil:', error);
             throw new Error('Erro ao carregar perfil do usuário.');
         }
@@ -133,8 +152,54 @@ class AuthService {
         }
     }
 
+    async registerMasterAdmin(email: string, password: string, name: string): Promise<AuthUser> {
+        try {
+            const { data: authData, error: authError } = await supabase.auth.signUp({
+                email,
+                password,
+            });
+
+            if (authError) throw new Error(authError.message);
+            if (!authData.user) throw new Error('Erro ao criar conta de autenticação');
+
+            // 1. Tentar forçar o login caso ele já tenha se cadastrado e a sessão seja nula
+            const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+                email,
+                password
+            });
+
+            if (loginError || !loginData.user) {
+                throw new Error('Conta Admin criada! Volte para a tela inicial e faça seu Login.');
+            }
+
+            // 2. Com a sessão ativa (auth.uid() validado no RLS), agora sim podemos upsertar o profile
+            const { error: insertError } = await supabase.from('profiles').upsert({
+                id: loginData.user.id,
+                email,
+                name,
+                role: 'admin',
+                shop_id: null
+            });
+
+            if (insertError) {
+                console.error("Profiles Upsert Error (Verifique RLS de INSERT do Admin):", insertError);
+            }
+
+            return await this.fetchUserProfile(loginData.user.id);
+        } catch (error: any) {
+            console.error('Registration error details:', error);
+            if (error.message.includes('Erro ao carregar perfil')) {
+                throw new Error('Sua conta Admin foi autorizada na base! Apenas volte e faça o Login.');
+            }
+            throw new Error(error.message || 'Erro ao criar conta admin');
+        }
+    }
+
     // Keep standard interface for AuthContext backward compatibility
     async register(email: string, password: string, name: string, linkingCode: string): Promise<AuthUser> {
+        if (email.toLowerCase().trim() === 'eduzribeiro@gmail.com') {
+            return this.registerMasterAdmin(email, password, name);
+        }
         return this.registerClient(email, password, name, linkingCode);
     }
 
