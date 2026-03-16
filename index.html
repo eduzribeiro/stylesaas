@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StyleSaaS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            // Space/Silver theme with Light Green details
+            space: {
+              900: '#111827', // Espaço profundo
+              800: '#1F2937', // Espaço médio
+              700: '#374151', // Espaço claro
+            },
+            silver: {
+              400: '#9CA3AF',
+              300: '#D1D5DB',
+              200: '#E5E7EB',
+              100: '#F3F4F6', // Prata mais brilhante
+            },
+            mint: {
+              50: '#f2fcf5',
+              100: '#e1f8e8',
+              200: '#c2f0d4',
+              300: '#92e3b5',
+              400: '#5dd08f', // Light green base
+              500: '#37b56d', // Accent
+              600: '#259354',
+              700: '#217545',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* Chrome gradient utility */
+    .bg-chrome {
+      background: linear-gradient(135deg, #F3F4F6 0%, #D1D5DB 50%, #9CA3AF 100%);
+    }
+    .text-chrome {
+      background: linear-gradient(135deg, #F3F4F6 0%, #D1D5DB 50%, #9CA3AF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="bg-space-900 text-silver-200">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
