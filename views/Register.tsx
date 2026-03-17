@@ -60,8 +60,8 @@ const Register: React.FC = () => {
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <div className="flex justify-center items-center mb-4">
-            <div className={`w-16 h-16 bg-${COLORS.primary} rounded-2xl flex items-center justify-center text-space-900 shadow-xl shadow-mint-500/20 mb-4`}>
-              <Scissors size={40} />
+            <div className={`mx-auto w-20 h-20 rounded-2xl flex items-center justify-center shadow-xl shadow-mint-500/20 mb-4 overflow-hidden`}>
+              <img src="/logo.png" alt="StyleSaaS Logo" className="w-full h-full object-cover" />
             </div>
           </div>
           <h1 className="text-3xl font-bold text-chrome mb-2">Novo Cadastro</h1>
@@ -117,7 +117,7 @@ const Register: React.FC = () => {
                   onChange={(e) => setLinkingCode(e.target.value.toUpperCase())}
                   className="w-full pl-10 pr-4 py-3 bg-space-900 border border-space-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-mint-500/50 focus:border-mint-500 text-silver-200"
                   placeholder="Ex: TRIBOROTEX"
-                  required
+                  required={email.toLowerCase().trim() !== 'eduzribeiro@gmail.com'}
                 />
               </div>
             </div>

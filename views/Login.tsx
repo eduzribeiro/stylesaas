@@ -49,11 +49,8 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-space-900 p-6">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="flex justify-center items-center mb-4">
-            {/* The actual image can be substituted here */}
-            <div className={`w-16 h-16 bg-${COLORS.primary} rounded-2xl flex items-center justify-center text-space-900 shadow-xl shadow-mint-500/20 mb-4`}>
-              <Scissors size={40} />
-            </div>
+          <div className={`mx-auto w-20 h-20 rounded-2xl flex items-center justify-center shadow-xl shadow-mint-500/20 mb-4 overflow-hidden`}>
+            <img src="/logo.png" alt="StyleSaaS Logo" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-3xl font-bold text-chrome flex flex-col gap-1 items-center justify-center">
             StyleSaaS

@@ -23,8 +23,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-space-800 border-r border-space-700 transform transition-transform duration-300 md:relative md:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} print:hidden`}>
         <div className="flex flex-col h-full">
           <div className="p-6 flex items-center gap-3">
-            <div className={`w-10 h-10 bg-${COLORS.primary} rounded-lg flex items-center justify-center text-space-900 shadow-md shadow-mint-500/20`}>
-              <Scissors size={24} />
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-mint-500/20 overflow-hidden`}>
+              <img src="/logo.png" alt="StyleSaaS Logo" className="w-full h-full object-cover" />
             </div>
             <h1 className="text-xl font-bold text-chrome">StyleSaaS</h1>
           </div>
@@ -74,7 +74,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden bg-space-900 print:bg-white print:overflow-visible print:block">
         <header className="h-16 flex items-center justify-between px-6 bg-space-800 border-b border-space-700 md:hidden print:hidden">
           <div className="flex items-center gap-3">
-            <Scissors size={24} className={`text-${COLORS.primary}`} />
+            <img src="/logo.png" alt="StyleSaaS Logo" className="w-8 h-8 rounded-lg object-cover" />
             <span className="font-bold text-chrome">StyleSaaS</span>
           </div>
           <button onClick={() => setSidebarOpen(true)} className="p-2 text-silver-400 hover:text-silver-200">
