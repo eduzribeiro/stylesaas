@@ -130,44 +130,44 @@ const AdminDashboard: React.FC = () => {
   }
 
   return (
-    <div className="p-4 md:p-8 text-chrome space-y-8 animate-in fade-in">
+    <div className="p-4 md:p-8 text-mint-400chrome space-y-8 animate-in fade-in">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-chrome to-silver-400 bg-clip-text text-transparent">
+          <h1 className="text-mint-4003xl font-bold bg-mint-400mint-500gradient-to-r from-chrome to-silver-400 bg-mint-400mint-500clip-text text-mint-400mint-500transparent">
             Gestão Master
           </h1>
-          <p className="text-silver-400 mt-2">Controle total de Barbearias, Usuários e Plataforma.</p>
+          <p className="text-mint-400silver-400 mt-2">Controle total de Barbearias, Usuários e Plataforma.</p>
         </div>
-        <div className="flex items-center gap-3 bg-space-800 p-3 rounded-xl border border-space-700 shadow-lg">
-          <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-${COLORS.primary} text-space-900 overflow-hidden`}>
+        <div className="flex items-center gap-3 bg-mint-400space-800 p-3 rounded-xl border border-mint-400space-700 shadow-lg">
+          <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-mint-400mint-500${COLORS.primary} text-mint-400space-900 overflow-hidden`}>
             <img src="/logo.png" alt="StyleSaaS Logo" className="w-full h-full object-cover" />
           </div>
-          <div className="text-sm">
-            <p className="font-bold text-silver-200">{user?.profile.name}</p>
-            <p className="text-mint-500 font-medium tracking-wide text-[10px] uppercase">Acesso Ilimitado</p>
+          <div className="text-mint-400sm">
+            <p className="font-bold text-mint-400silver-200">{user?.profile.name}</p>
+            <p className="text-mint-400mint-500 font-medium tracking-wide text-mint-400[10px] uppercase">Acesso Ilimitado</p>
           </div>
         </div>
       </div>
 
       {/* Tabs Menu */}
-      <div className="flex space-x-2 border-b border-space-700 pb-px">
+      <div className="flex space-x-2 border-mint-400b border-mint-400space-700 pb-px">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${activeTab === 'overview' ? `border-mint-500 text-mint-500` : 'border-transparent text-silver-400 hover:text-silver-200'}`}
+          className={`px-4 py-2 border-mint-400b-2 font-medium text-mint-400sm transition-colors flex items-center gap-2 ${activeTab === 'overview' ? `border-mint-400mint-500 text-mint-400mint-500` : 'border-mint-400transparent text-mint-400silver-400 hover:text-mint-400silver-200'}`}
         >
           <LayoutDashboard size={18} />
           Visão Geral
         </button>
         <button
           onClick={() => setActiveTab('shops')}
-          className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${activeTab === 'shops' ? `border-mint-500 text-mint-500` : 'border-transparent text-silver-400 hover:text-silver-200'}`}
+          className={`px-4 py-2 border-mint-400b-2 font-medium text-mint-400sm transition-colors flex items-center gap-2 ${activeTab === 'shops' ? `border-mint-400mint-500 text-mint-400mint-500` : 'border-mint-400transparent text-mint-400silver-400 hover:text-mint-400silver-200'}`}
         >
           <Building2 size={18} />
           Barbearias
         </button>
         <button
           onClick={() => setActiveTab('users')}
-          className={`px-4 py-2 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${activeTab === 'users' ? `border-mint-500 text-mint-500` : 'border-transparent text-silver-400 hover:text-silver-200'}`}
+          className={`px-4 py-2 border-mint-400b-2 font-medium text-mint-400sm transition-colors flex items-center gap-2 ${activeTab === 'users' ? `border-mint-400mint-500 text-mint-400mint-500` : 'border-mint-400transparent text-mint-400silver-400 hover:text-mint-400silver-200'}`}
         >
           <Users size={18} />
           Controle de Acessos
@@ -176,66 +176,66 @@ const AdminDashboard: React.FC = () => {
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 animate-pulse">
-          <div className="h-32 bg-space-800 rounded-2xl" />
-          <div className="h-32 bg-space-800 rounded-2xl" />
-          <div className="h-32 bg-space-800 rounded-2xl" />
-          <div className="h-32 bg-space-800 rounded-2xl" />
+          <div className="h-32 bg-mint-400space-800 rounded-2xl" />
+          <div className="h-32 bg-mint-400space-800 rounded-2xl" />
+          <div className="h-32 bg-mint-400space-800 rounded-2xl" />
+          <div className="h-32 bg-mint-400space-800 rounded-2xl" />
         </div>
       ) : (
         <>
           {/* TAB: OVERVIEW */}
           {activeTab === 'overview' && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-in fade-in slide-in-from-bottom-2">
-              <div className="bg-space-800 rounded-2xl p-6 border border-space-700 shadow-xl relative overflow-hidden group hover:border-mint-500/30 transition-colors">
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-mint-500/10 rounded-full blur-2xl group-hover:bg-mint-500/20 transition-all" />
+              <div className="bg-mint-400space-800 rounded-2xl p-6 border border-mint-400space-700 shadow-xl relative overflow-hidden group hover:border-mint-400mint-500/30 transition-colors">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-mint-400mint-500/10 rounded-full blur-2xl group-hover:bg-mint-400mint-500/20 transition-all" />
                 <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 bg-space-900 rounded-xl text-${COLORS.primary}`}>
+                  <div className={`p-3 bg-mint-400space-900 rounded-xl text-mint-400mint-500${COLORS.primary}`}>
                     <Building2 size={24} />
                   </div>
                 </div>
                 <div>
-                  <p className="text-silver-400 text-sm font-medium mb-1">Barbearias Ativas</p>
-                  <h3 className="text-3xl font-bold text-chrome">{stats.totalShops}</h3>
+                  <p className="text-mint-400silver-400 text-mint-400sm font-medium mb-1">Barbearias Ativas</p>
+                  <h3 className="text-mint-4003xl font-bold text-mint-400chrome">{stats.totalShops}</h3>
                 </div>
               </div>
 
-              <div className="bg-space-800 rounded-2xl p-6 border border-space-700 shadow-xl relative overflow-hidden group hover:border-blue-500/30 transition-colors">
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all" />
+              <div className="bg-mint-400space-800 rounded-2xl p-6 border border-mint-400space-700 shadow-xl relative overflow-hidden group hover:border-mint-400blue-500/30 transition-colors">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-mint-400blue-500/10 rounded-full blur-2xl group-hover:bg-mint-400blue-500/20 transition-all" />
                 <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 bg-space-900 rounded-xl text-blue-400`}>
+                  <div className={`p-3 bg-mint-400space-900 rounded-xl text-mint-400blue-400`}>
                     <Users size={24} />
                   </div>
                 </div>
                 <div>
-                  <p className="text-silver-400 text-sm font-medium mb-1">Total de Contas</p>
-                  <h3 className="text-3xl font-bold text-chrome">{stats.totalUsers}</h3>
+                  <p className="text-mint-400silver-400 text-mint-400sm font-medium mb-1">Total de Contas</p>
+                  <h3 className="text-mint-4003xl font-bold text-mint-400chrome">{stats.totalUsers}</h3>
                 </div>
               </div>
 
-              <div className="bg-space-800 rounded-2xl p-6 border border-space-700 shadow-xl relative overflow-hidden group hover:border-purple-500/30 transition-colors">
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all" />
+              <div className="bg-mint-400space-800 rounded-2xl p-6 border border-mint-400space-700 shadow-xl relative overflow-hidden group hover:border-mint-400mint-500purple-500/30 transition-colors">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-mint-400mint-500purple-500/10 rounded-full blur-2xl group-hover:bg-mint-400mint-500purple-500/20 transition-all" />
                 <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 bg-space-900 rounded-xl text-purple-400`}>
+                  <div className={`p-3 bg-mint-400space-900 rounded-xl text-mint-400mint-500purple-400`}>
                     <CalendarCheck size={24} />
                   </div>
                 </div>
                 <div>
-                  <p className="text-silver-400 text-sm font-medium mb-1">Agendamentos Reais</p>
-                  <h3 className="text-3xl font-bold text-chrome">{stats.totalAppointments}</h3>
+                  <p className="text-mint-400silver-400 text-mint-400sm font-medium mb-1">Agendamentos Reais</p>
+                  <h3 className="text-mint-4003xl font-bold text-mint-400chrome">{stats.totalAppointments}</h3>
                 </div>
               </div>
 
-              <div className="bg-space-800 rounded-2xl p-6 border border-space-700 shadow-xl relative overflow-hidden group hover:border-emerald-500/30 transition-colors">
-                <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all" />
+              <div className="bg-mint-400space-800 rounded-2xl p-6 border border-mint-400space-700 shadow-xl relative overflow-hidden group hover:border-mint-400emerald-500/30 transition-colors">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-mint-400emerald-500/10 rounded-full blur-2xl group-hover:bg-mint-400emerald-500/20 transition-all" />
                 <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 bg-space-900 rounded-xl text-emerald-400`}>
+                  <div className={`p-3 bg-mint-400space-900 rounded-xl text-mint-400emerald-400`}>
                     <TrendingUp size={24} />
                   </div>
                 </div>
                 <div>
-                  <p className="text-silver-400 text-sm font-medium mb-1">SaaS Status Core</p>
-                  <h3 className="text-xl font-bold text-chrome mt-2 flex items-center gap-2">
-                    <ShieldCheck size={20} className="text-emerald-500" /> Operacional
+                  <p className="text-mint-400silver-400 text-mint-400sm font-medium mb-1">SaaS Status Core</p>
+                  <h3 className="text-mint-400mint-500xl font-bold text-mint-400chrome mt-2 flex items-center gap-2">
+                    <ShieldCheck size={20} className="text-mint-400emerald-500" /> Operacional
                   </h3>
                 </div>
               </div>
@@ -244,56 +244,56 @@ const AdminDashboard: React.FC = () => {
 
           {/* TAB: SHOPS */}
           {activeTab === 'shops' && (
-            <div className="bg-space-800 border border-space-700 rounded-2xl shadow-xl overflow-hidden animate-in fade-in">
-              <div className="p-6 border-b border-space-700 flex justify-between items-center bg-space-900/40">
-                <h2 className="text-xl font-bold text-chrome flex items-center gap-2">
-                  <Building2 className={`text-${COLORS.primary}`} />
+            <div className="bg-mint-400space-800 border border-mint-400space-700 rounded-2xl shadow-xl overflow-hidden animate-in fade-in">
+              <div className="p-6 border-mint-400b border-mint-400space-700 flex justify-between items-center bg-mint-400space-900/40">
+                <h2 className="text-mint-400mint-500xl font-bold text-mint-400chrome flex items-center gap-2">
+                  <Building2 className={`text-mint-400mint-500${COLORS.primary}`} />
                   Gerenciamento de Barbearias
                 </h2>
                 <div className="flex items-center gap-4">
                   <div className="relative hidden sm:block">
-                    <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-space-500" />
-                    <input type="text" placeholder="Pesquisar..." className="bg-space-900 border border-space-700 text-sm text-silver-200 py-2 pl-10 pr-4 rounded-xl focus:outline-none focus:border-mint-500" />
+                    <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-mint-400space-500" />
+                    <input type="text" placeholder="Pesquisar..." className="bg-mint-400space-900 border border-mint-400space-700 text-mint-400sm text-mint-400silver-200 py-2 pl-10 pr-4 rounded-xl focus:outline-none focus:border-mint-400mint-500" />
                   </div>
                   <button
                     onClick={() => setIsNewShopModalOpen(true)}
-                    className="flex items-center gap-2 bg-mint-600 hover:bg-mint-500 text-space-900 font-bold px-4 py-2 rounded-xl transition-all shadow-lg shadow-mint-500/20"
+                    className="flex items-center gap-2 bg-mint-400mint-600 hover:bg-mint-400mint-500 text-mint-400space-900 font-bold px-4 py-2 rounded-xl transition-all shadow-lg shadow-mint-500/20"
                   >
                     <Plus size={18} /> Nova Barbearia
                   </button>
                 </div>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm text-silver-300">
-                  <thead className="text-xs uppercase bg-space-900/50 text-silver-400 border-b border-space-700">
+                <table className="w-full text-mint-400mint-500left text-mint-400sm text-mint-400silver-300">
+                  <thead className="text-mint-400xs uppercase bg-mint-400space-900/50 text-mint-400silver-400 border-mint-400b border-mint-400space-700">
                     <tr>
                       <th className="px-6 py-4 font-medium">Nome (Linking Code)</th>
                       <th className="px-6 py-4 font-medium">Fidelidade</th>
-                      <th className="px-6 py-4 font-medium text-right">Ações</th>
+                      <th className="px-6 py-4 font-medium text-mint-400mint-500right">Ações</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-space-700">
                     {shopsList.length === 0 ? (
                       <tr>
-                        <td colSpan={3} className="px-6 py-8 text-center text-silver-500">Nenhuma barbearia gerada no sistema.</td>
+                        <td colSpan={3} className="px-6 py-8 text-mint-400center text-mint-400silver-500">Nenhuma barbearia gerada no sistema.</td>
                       </tr>
                     ) : shopsList.map((shop) => (
-                      <tr key={shop.id} className="hover:bg-space-700/50 transition-colors">
-                        <td className="px-6 py-4 font-bold text-chrome">
+                      <tr key={shop.id} className="hover:bg-mint-400space-700/50 transition-colors">
+                        <td className="px-6 py-4 font-bold text-mint-400chrome">
                           {shop.name}
-                          <span className="ml-2 px-2 py-0.5 rounded-md bg-space-900 border border-space-600 font-mono text-xs text-mint-400">
+                          <span className="ml-2 px-2 py-0.5 rounded-md bg-mint-400space-900 border border-mint-400space-600 font-mono text-mint-400xs text-mint-400mint-500">
                             {shop.linking_code}
                           </span>
                         </td>
                         <td className="px-6 py-4">
                           {shop.loyalty_enabled ? (
-                            <span className="text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-1 rounded text-xs">Ativado ({shop.loyalty_goal} pt)</span>
+                            <span className="text-mint-400emerald-400 bg-mint-400emerald-400/10 border border-mint-400emerald-400/20 px-2 py-1 rounded text-mint-400xs">Ativado ({shop.loyalty_goal} pt)</span>
                           ) : (
-                            <span className="text-space-500 bg-space-900 border border-space-700 px-2 py-1 rounded text-xs">Desativado</span>
+                            <span className="text-mint-400space-500 bg-mint-400space-900 border border-mint-400space-700 px-2 py-1 rounded text-mint-400xs">Desativado</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-right">
-                          <button onClick={() => handleDeleteShop(shop.id)} className="p-2 text-red-400/70 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors">
+                        <td className="px-6 py-4 text-mint-400mint-500right">
+                          <button onClick={() => handleDeleteShop(shop.id)} className="p-2 text-mint-400red-400/70 hover:text-mint-400red-400 hover:bg-mint-400red-400/10 rounded-lg transition-colors">
                             <Trash2 size={18} />
                           </button>
                         </td>
@@ -307,56 +307,56 @@ const AdminDashboard: React.FC = () => {
 
           {/* TAB: USERS */}
           {activeTab === 'users' && (
-            <div className="bg-space-800 border border-space-700 rounded-2xl shadow-xl overflow-hidden animate-in fade-in">
-              <div className="p-6 border-b border-space-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-space-900/40">
-                <h2 className="text-xl font-bold text-chrome flex items-center gap-2">
-                  <Settings2 className={`text-${COLORS.primary}`} />
+            <div className="bg-mint-400space-800 border border-mint-400space-700 rounded-2xl shadow-xl overflow-hidden animate-in fade-in">
+              <div className="p-6 border-mint-400b border-mint-400space-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-mint-400space-900/40">
+                <h2 className="text-mint-400mint-500xl font-bold text-mint-400chrome flex items-center gap-2">
+                  <Settings2 className={`text-mint-400mint-500${COLORS.primary}`} />
                   Controle de Acessos Dinâmico
                 </h2>
                 <div className="relative w-full sm:w-auto">
-                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-space-500" />
-                  <input type="text" placeholder="Buscar por email..." className="w-full sm:w-auto bg-space-900 border border-space-700 text-sm text-silver-200 py-2 pl-10 pr-4 rounded-xl focus:outline-none focus:border-mint-500" />
+                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-mint-400space-500" />
+                  <input type="text" placeholder="Buscar por email..." className="w-full sm:w-auto bg-mint-400space-900 border border-mint-400space-700 text-mint-400sm text-mint-400silver-200 py-2 pl-10 pr-4 rounded-xl focus:outline-none focus:border-mint-400mint-500" />
                 </div>
               </div>
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm text-silver-300">
-                  <thead className="text-xs uppercase bg-space-900/50 text-silver-400 border-b border-space-700">
+                <table className="w-full text-mint-400mint-500left text-mint-400sm text-mint-400silver-300">
+                  <thead className="text-mint-400xs uppercase bg-mint-400space-900/50 text-mint-400silver-400 border-mint-400b border-mint-400space-700">
                     <tr>
                       <th className="px-6 py-4 font-medium">Nome</th>
                       <th className="px-6 py-4 font-medium">E-mail</th>
                       <th className="px-6 py-4 font-medium">Barbearia Vinculada</th>
                       <th className="px-6 py-4 font-medium">Hierarquia</th>
-                      <th className="px-6 py-4 font-medium text-right">Ação</th>
+                      <th className="px-6 py-4 font-medium text-mint-400mint-500right">Ação</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-space-700">
                     {usersList.length === 0 ? (
                       <tr>
-                        <td colSpan={5} className="px-6 py-8 text-center text-silver-500">Sem acessos registrados.</td>
+                        <td colSpan={5} className="px-6 py-8 text-mint-400center text-mint-400silver-500">Sem acessos registrados.</td>
                       </tr>
                     ) : usersList.map((usr) => {
                       const shopBinding = shopsList.find(s => s.id === usr.shop_id);
                       return (
-                        <tr key={usr.id} className="hover:bg-space-700/50 transition-colors">
-                          <td className="px-6 py-4 font-bold text-silver-200">{usr.name}</td>
-                          <td className="px-6 py-4 text-silver-400">{usr.email}</td>
+                        <tr key={usr.id} className="hover:bg-mint-400space-700/50 transition-colors">
+                          <td className="px-6 py-4 font-bold text-mint-400silver-200">{usr.name}</td>
+                          <td className="px-6 py-4 text-mint-400silver-400">{usr.email}</td>
                           <td className="px-6 py-4">
                             {shopBinding ? (
-                              <span className="text-blue-300 font-medium bg-blue-500/10 px-2 py-1 rounded text-xs border border-blue-500/20">{shopBinding.name}</span>
+                              <span className="text-mint-400blue-300 font-medium bg-mint-400blue-500/10 px-2 py-1 rounded text-mint-400xs border border-mint-400blue-500/20">{shopBinding.name}</span>
                             ) : (
-                              <span className="text-space-500">— Global / Solto —</span>
+                              <span className="text-mint-400space-500">— Global / Solto —</span>
                             )}
                           </td>
                           <td className="px-6 py-4">
-                            {usr.role === 'admin' && <span className="text-purple-400 bg-purple-400/10 border border-purple-400/20 px-2 py-1 rounded text-xs font-bold uppercase">Master Admin</span>}
-                            {usr.role === 'shop_owner' && <span className="text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 px-2 py-1 rounded text-xs font-bold uppercase">Dono (Gestor)</span>}
-                            {usr.role === 'staff' && <span className="text-blue-400 bg-blue-400/10 border border-blue-400/20 px-2 py-1 rounded text-xs font-bold uppercase">Staff Barbeiro</span>}
-                            {usr.role === 'client' && <span className="text-space-400 bg-space-600/10 border border-space-600/20 px-2 py-1 rounded text-xs font-bold uppercase">Cliente Padrão</span>}
+                            {usr.role === 'admin' && <span className="text-mint-400mint-500purple-400 bg-mint-400mint-500purple-400/10 border border-mint-400mint-500purple-400/20 px-2 py-1 rounded text-mint-400xs font-bold uppercase">Master Admin</span>}
+                            {usr.role === 'shop_owner' && <span className="text-mint-400emerald-400 bg-mint-400emerald-400/10 border border-mint-400emerald-400/20 px-2 py-1 rounded text-mint-400xs font-bold uppercase">Dono (Gestor)</span>}
+                            {usr.role === 'staff' && <span className="text-mint-400blue-400 bg-mint-400blue-400/10 border border-mint-400blue-400/20 px-2 py-1 rounded text-mint-400xs font-bold uppercase">Staff Barbeiro</span>}
+                            {usr.role === 'client' && <span className="text-mint-400space-400 bg-mint-400space-600/10 border border-mint-400space-600/20 px-2 py-1 rounded text-mint-400xs font-bold uppercase">Cliente Padrão</span>}
                           </td>
-                          <td className="px-6 py-4 text-right">
+                          <td className="px-6 py-4 text-mint-400mint-500right">
                             <button
                               onClick={() => handleOpenEditUser(usr)}
-                              className="bg-space-700 hover:bg-space-600 text-silver-200 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors border border-space-600"
+                              className="bg-mint-400space-700 hover:bg-mint-400space-600 text-mint-400silver-200 px-3 py-1.5 rounded-lg text-mint-400xs font-medium transition-colors border border-mint-400space-600"
                             >
                               Alterar Permissão
                             </button>
@@ -374,42 +374,42 @@ const AdminDashboard: React.FC = () => {
 
       {/* MODAL: Nova Barbearia */}
       {isNewShopModalOpen && (
-        <div className="fixed inset-0 bg-space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-space-800 rounded-2xl border border-space-700 p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="fixed inset-0 bg-mint-400space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-mint-400space-800 rounded-2xl border border-mint-400space-700 p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-chrome">Criar Nova Barbearia</h3>
-              <button onClick={() => setIsNewShopModalOpen(false)} className="text-space-500 hover:text-silver-200">
+              <h3 className="text-mint-400mint-500xl font-bold text-mint-400chrome">Criar Nova Barbearia</h3>
+              <button onClick={() => setIsNewShopModalOpen(false)} className="text-mint-400space-500 hover:text-mint-400silver-200">
                 <X size={24} />
               </button>
             </div>
 
             <form onSubmit={handleCreateShop} className="space-y-4">
-              {errorMsg && <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">{errorMsg}</div>}
+              {errorMsg && <div className="p-3 bg-mint-400red-500/10 border border-mint-400red-500/20 rounded-xl text-mint-400red-400 text-mint-400sm">{errorMsg}</div>}
               <div>
-                <label className="block text-sm font-medium text-silver-300 mb-1">Nome do Estabelecimento *</label>
+                <label className="block text-mint-400sm font-medium text-mint-400silver-300 mb-1">Nome do Estabelecimento *</label>
                 <input
                   type="text"
                   value={newShopName}
                   onChange={e => setNewShopName(e.target.value)}
-                  className="w-full bg-space-900 border border-space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-500 text-silver-200"
+                  className="w-full bg-mint-400space-900 border border-mint-400space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-400mint-500 text-mint-400silver-200"
                   placeholder="Ex: Barber Shop Vintage"
                   required
                 />
               </div>
-              <p className="text-xs text-space-500">O código VIP (Linking Code) será gerado automaticamente para que clientes se vinculem no cadastro.</p>
+              <p className="text-mint-400xs text-mint-400space-500">O código VIP (Linking Code) será gerado automaticamente para que clientes se vinculem no cadastro.</p>
 
-              <div className="flex gap-3 pt-4 border-t border-space-700">
+              <div className="flex gap-3 pt-4 border-mint-400mint-500t border-mint-400space-700">
                 <button
                   type="button"
                   onClick={() => setIsNewShopModalOpen(false)}
-                  className="flex-1 py-3 px-4 rounded-xl border border-space-700 text-silver-300 hover:bg-space-700 font-medium"
+                  className="flex-1 py-3 px-4 rounded-xl border border-mint-400space-700 text-mint-400silver-300 hover:bg-mint-400space-700 font-medium"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 py-3 px-4 rounded-xl bg-mint-600 hover:bg-mint-500 text-space-900 font-bold disabled:opacity-50"
+                  className="flex-1 py-3 px-4 rounded-xl bg-mint-400mint-600 hover:bg-mint-400mint-500 text-mint-400space-900 font-bold disabled:opacity-50"
                 >
                   {isSubmitting ? 'Gerando...' : 'Salvar SaaS'}
                 </button>
@@ -421,27 +421,27 @@ const AdminDashboard: React.FC = () => {
 
       {/* MODAL: Edit User Permissions */}
       {isEditUserModalOpen && selectedUser && (
-        <div className="fixed inset-0 bg-space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-space-800 rounded-2xl border border-space-700 p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95">
+        <div className="fixed inset-0 bg-mint-400space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-mint-400space-800 rounded-2xl border border-mint-400space-700 p-6 w-full max-w-md shadow-2xl animate-in zoom-in-95">
             <div className="flex justify-between items-center mb-6">
-              <h3 className="text-xl font-bold text-chrome text-left">
+              <h3 className="text-mint-400mint-500xl font-bold text-mint-400chrome text-mint-400mint-500left">
                 Editar Permissões <br />
-                <span className="text-sm font-normal text-silver-500 block mt-1">{selectedUser.email}</span>
+                <span className="text-mint-400sm font-normal text-mint-400silver-500 block mt-1">{selectedUser.email}</span>
               </h3>
-              <button onClick={() => setIsEditUserModalOpen(false)} className="text-space-500 hover:text-silver-200">
+              <button onClick={() => setIsEditUserModalOpen(false)} className="text-mint-400space-500 hover:text-mint-400silver-200">
                 <X size={24} />
               </button>
             </div>
 
             <form onSubmit={handleUpdateUser} className="space-y-4">
-              {errorMsg && <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm">{errorMsg}</div>}
+              {errorMsg && <div className="p-3 bg-mint-400red-500/10 border border-mint-400red-500/20 rounded-xl text-mint-400red-400 text-mint-400sm">{errorMsg}</div>}
 
               <div>
-                <label className="block text-sm font-medium text-silver-300 mb-1">Hierarquia (Role) *</label>
+                <label className="block text-mint-400sm font-medium text-mint-400silver-300 mb-1">Hierarquia (Role) *</label>
                 <select
                   value={editUserRole}
                   onChange={e => setEditUserRole(e.target.value)}
-                  className="w-full bg-space-900 border border-space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-500 text-silver-200 appearance-none"
+                  className="w-full bg-mint-400space-900 border border-mint-400space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-400mint-500 text-mint-400silver-200 appearance-none"
                   required
                 >
                   <option value="client">Cliente Padrão</option>
@@ -453,11 +453,11 @@ const AdminDashboard: React.FC = () => {
 
               {(editUserRole === 'shop_owner' || editUserRole === 'staff') && (
                 <div>
-                  <label className="block text-sm font-medium text-silver-300 mb-1">Vincular a qual Barbearia?</label>
+                  <label className="block text-mint-400sm font-medium text-mint-400silver-300 mb-1">Vincular a qual Barbearia?</label>
                   <select
                     value={editUserShopId}
                     onChange={e => setEditUserShopId(e.target.value)}
-                    className="w-full bg-space-900 border border-space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-500 text-silver-200 appearance-none"
+                    className="w-full bg-mint-400space-900 border border-mint-400space-700 rounded-xl py-3 px-4 focus:outline-none focus:border-mint-400mint-500 text-mint-400silver-200 appearance-none"
                     required
                   >
                     <option value="">-- Selecione uma Barbearia --</option>
@@ -465,22 +465,22 @@ const AdminDashboard: React.FC = () => {
                       <option key={s.id} value={s.id}>{s.name} ({s.linking_code})</option>
                     ))}
                   </select>
-                  <p className="text-xs text-blue-400/70 mt-2">DICA: Defina para &quot;Dono&quot; e ele poderá controlar tudo dentro desta barbearia selecionada.</p>
+                  <p className="text-mint-400xs text-mint-400blue-400/70 mt-2">DICA: Defina para &quot;Dono&quot; e ele poderá controlar tudo dentro desta barbearia selecionada.</p>
                 </div>
               )}
 
-              <div className="flex gap-3 pt-6 border-t border-space-700">
+              <div className="flex gap-3 pt-6 border-mint-400mint-500t border-mint-400space-700">
                 <button
                   type="button"
                   onClick={() => setIsEditUserModalOpen(false)}
-                  className="flex-1 py-3 px-4 rounded-xl border border-space-700 text-silver-300 hover:bg-space-700 font-medium"
+                  className="flex-1 py-3 px-4 rounded-xl border border-mint-400space-700 text-mint-400silver-300 hover:bg-mint-400space-700 font-medium"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold disabled:opacity-50"
+                  className="flex-1 py-3 px-4 rounded-xl bg-mint-400mint-500purple-600 hover:bg-mint-400mint-500purple-500 text-mint-400mint-500white font-bold disabled:opacity-50"
                 >
                   {isSubmitting ? 'Salvando...' : 'Atualizar Permissões'}
                 </button>

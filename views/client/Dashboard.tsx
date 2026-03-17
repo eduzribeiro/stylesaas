@@ -109,25 +109,25 @@ const ClientDashboard: React.FC = () => {
 
     return (
         <div className="p-4 md:p-8 space-y-6 max-w-2xl mx-auto">
-            <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold text-chrome">Olá, {user?.profile?.name}</h1>
-                <p className="text-silver-400 mt-1">Bem-vindo(a) à {shop?.name || 'Barbearia'}</p>
+            <div className="text-mint-400center mb-8">
+                <h1 className="text-mint-4002xl font-bold text-mint-400chrome">Olá, {user?.profile?.name}</h1>
+                <p className="text-mint-400silver-400 mt-1">Bem-vindo(a) à {shop?.name || 'Barbearia'}</p>
             </div>
 
             {shop?.loyalty_enabled && (
-                <div className="bg-space-800 p-8 rounded-[2rem] border-2 border-mint-500/20 shadow-[0_0_30px_rgba(93,208,143,0.1)] text-center relative overflow-hidden">
+                <div className="bg-mint-400space-800 p-8 rounded-[2rem] border-mint-4002 border-mint-400mint-500/20 shadow-[0_0_30px_rgba(93,208,143,0.1)] text-mint-400center relative overflow-hidden">
                     <div className="absolute top-0 right-0 p-4 opacity-5">
                         <Award size={100} />
                     </div>
-                    <h2 className="text-xl font-bold text-chrome mb-4 relative z-10">Seu Cartão Fidelidade</h2>
-                    <div className="text-5xl font-black text-mint-400 mb-2 relative z-10 font-mono tracking-tighter">
-                        {loyalty?.stamps_count || 0} <span className="text-2xl text-silver-500">/ {shop.loyalty_goal}</span>
+                    <h2 className="text-mint-400xl font-bold text-mint-400chrome mb-4 relative z-10">Seu Cartão Fidelidade</h2>
+                    <div className="text-mint-4005xl font-black text-mint-400mint-500 mb-2 relative z-10 font-mono tracking-tighter">
+                        {loyalty?.stamps_count || 0} <span className="text-mint-4002xl text-mint-400silver-500">/ {shop.loyalty_goal}</span>
                     </div>
-                    <p className="text-silver-400 relative z-10 mt-4 text-sm font-medium">Recompensa: {shop.loyalty_reward}</p>
+                    <p className="text-mint-400silver-400 relative z-10 mt-4 text-mint-400sm font-medium">Recompensa: {shop.loyalty_reward}</p>
 
-                    <div className="w-full bg-space-900 rounded-full h-3 mt-6 overflow-hidden border border-space-700 relative z-10">
+                    <div className="w-full bg-mint-400space-900 rounded-full h-3 mt-6 overflow-hidden border border-mint-400space-700 relative z-10">
                         <div
-                            className="bg-gradient-to-r from-mint-600 to-mint-400 h-3 rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(93,208,143,0.5)]"
+                            className="bg-mint-400gradient-to-r from-mint-600 to-mint-400 h-3 rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(93,208,143,0.5)]"
                             style={{ width: `${Math.min(((loyalty?.stamps_count || 0) / shop.loyalty_goal) * 100, 100)}%` }}
                         ></div>
                     </div>
@@ -135,21 +135,21 @@ const ClientDashboard: React.FC = () => {
             )}
 
             {/* Formulário de Agendamento */}
-            <div className="bg-space-800 p-6 md:p-8 rounded-2xl border border-space-700">
-                <h2 className="text-xl font-bold text-chrome mb-6 flex items-center gap-2">
-                    <Calendar size={20} className="text-mint-400" />
+            <div className="bg-mint-400space-800 p-6 md:p-8 rounded-2xl border border-mint-400space-700">
+                <h2 className="text-mint-400xl font-bold text-mint-400chrome mb-6 flex items-center gap-2">
+                    <Calendar size={20} className="text-mint-400mint-500" />
                     Novo Agendamento
                 </h2>
 
                 {bookingSuccess && (
-                    <div className="mb-6 p-4 bg-mint-500/10 text-mint-400 border border-mint-500/20 rounded-xl font-medium flex items-center gap-3">
+                    <div className="mb-6 p-4 bg-mint-400mint-500/10 text-mint-400mint-500 border border-mint-400mint-500/20 rounded-xl font-medium flex items-center gap-3">
                         <CheckCircle size={20} />
                         Seu horário foi agendado com sucesso!
                     </div>
                 )}
 
                 {bookingError && (
-                    <div className="mb-6 p-4 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl font-medium flex gap-3 text-sm">
+                    <div className="mb-6 p-4 bg-mint-400red-500/10 text-mint-400red-400 border border-mint-400red-500/20 rounded-xl font-medium flex gap-3 text-mint-400sm">
                         <AlertTriangle size={20} className="shrink-0" />
                         {bookingError}
                     </div>
@@ -158,11 +158,11 @@ const ClientDashboard: React.FC = () => {
                 <form onSubmit={handleBook} className="space-y-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label className="block text-sm font-medium text-silver-400 mb-1">Serviço</label>
+                            <label className="block text-mint-400sm font-medium text-mint-400silver-400 mb-1">Serviço</label>
                             <select
                                 value={selectedService}
                                 onChange={e => setSelectedService(e.target.value)}
-                                className="w-full bg-space-900 border border-space-700 text-silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
+                                className="w-full bg-mint-400space-900 border border-mint-400space-700 text-mint-400silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
                             >
                                 <option value="">Escolha um serviço...</option>
                                 {servicesList.map(s => (
@@ -172,11 +172,11 @@ const ClientDashboard: React.FC = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-silver-400 mb-1">Profissional</label>
+                            <label className="block text-mint-400sm font-medium text-mint-400silver-400 mb-1">Profissional</label>
                             <select
                                 value={selectedStaff}
                                 onChange={e => setSelectedStaff(e.target.value)}
-                                className="w-full bg-space-900 border border-space-700 text-silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
+                                className="w-full bg-mint-400space-900 border border-mint-400space-700 text-mint-400silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
                             >
                                 <option value="">Escolha o barbeiro...</option>
                                 {staffList.map(s => (
@@ -188,22 +188,22 @@ const ClientDashboard: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                            <label className="block text-sm font-medium text-silver-400 mb-1">Data</label>
+                            <label className="block text-mint-400sm font-medium text-mint-400silver-400 mb-1">Data</label>
                             <input
                                 type="date"
                                 min={new Date().toISOString().split('T')[0]}
                                 value={selectedDate}
                                 onChange={e => setSelectedDate(e.target.value)}
-                                className="w-full bg-space-900 border border-space-700 text-silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
+                                className="w-full bg-mint-400space-900 border border-mint-400space-700 text-mint-400silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-silver-400 mb-1">Horário</label>
+                            <label className="block text-mint-400sm font-medium text-mint-400silver-400 mb-1">Horário</label>
                             <input
                                 type="time"
                                 value={selectedTime}
                                 onChange={e => setSelectedTime(e.target.value)}
-                                className="w-full bg-space-900 border border-space-700 text-silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
+                                className="w-full bg-mint-400space-900 border border-mint-400space-700 text-mint-400silver-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-mint-500/50"
                             />
                         </div>
                     </div>
@@ -211,7 +211,7 @@ const ClientDashboard: React.FC = () => {
                     <button
                         type="submit"
                         disabled={isBooking}
-                        className="w-full pt-2 mt-4 bg-mint-600 hover:bg-mint-500 text-space-900 font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-lg disabled:opacity-50"
+                        className="w-full pt-2 mt-4 bg-mint-400mint-600 hover:bg-mint-400mint-500 text-mint-400space-900 font-bold py-4 px-6 rounded-xl shadow-lg transition-all text-mint-400lg disabled:opacity-50"
                     >
                         {isBooking ? 'Reservando...' : 'Confirmar Agendamento'}
                     </button>
