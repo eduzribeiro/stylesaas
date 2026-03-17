@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout';
 
 import AdminDashboard from './views/admin/Dashboard';
 import OwnerDashboard from './views/owner/Dashboard';
+import TeamServices from './views/owner/TeamServices';
 import StaffDashboard from './views/staff/Dashboard';
 import ClientDashboard from './views/client/Dashboard';
 
@@ -43,6 +44,14 @@ const App: React.FC = () => {
                       element={
                         <ProtectedRoute allowedRoles={['shop_owner']}>
                           <OwnerDashboard />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
+                      path="/owner/equipe"
+                      element={
+                        <ProtectedRoute allowedRoles={['shop_owner']}>
+                          <TeamServices />
                         </ProtectedRoute>
                       }
                     />
