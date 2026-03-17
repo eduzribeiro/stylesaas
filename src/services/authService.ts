@@ -138,12 +138,6 @@ class AuthService {
 
             // Note: client table also needs to be populated if you want it to appear in `clients` view,
             // but for simplicity `profiles` with role 'client' handles the core logic.
-            // Let's insert into clients table too just in case.
-            await supabase.from('clients').insert({
-                user_id: authData.user.id,
-                shop_id: shop.id,
-                name
-            });
 
             return await this.fetchUserProfile(authData.user.id);
         } catch (error: any) {
