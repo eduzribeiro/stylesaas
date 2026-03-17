@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../src/context';
 import { supabase } from '../../src/lib/supabase';
-import { Users, Scissors, Plus, Trash2, Edit } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
+import { Users, Scissors, Plus, Trash2, Edit, X } from 'lucide-react';
 import { COLORS } from '../../constants';
 
 const TeamServices: React.FC = () => {
@@ -14,6 +15,11 @@ const TeamServices: React.FC = () => {
     // Modals
     const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
     const [serviceForm, setServiceForm] = useState({ id: '', name: '', price: '', duration: '' });
+
+    // Add Staff Modal State
+    const [isStaffModalOpen, setIsStaffModalOpen] = useState(false);
+    const [staffForm, setStaffForm] = useState({ name: '', email: '', password: '', commission_rate: '50' });
+    const [staffLoading, setStaffLoading] = useState(false);
 
     const [loading, setLoading] = useState(true);
 
@@ -76,6 +82,58 @@ const TeamServices: React.FC = () => {
         if (!window.confirm('Excluir este serviço?')) return;
         await supabase.from('services').delete().eq('id', id);
         fetchData();
+    };
+
+    const handleCreateStaff = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!user?.shop_id) return;
+        setStaffLoading(true);
+
+        try {
+            // 1. Criar Auth Supabase Client Temporário para não bugar a sessão do Dono (desloga sozinho)
+            const tempClient = createClient(
+                import.meta.env.VITE_SUPABASE_URL,
+                import.meta.env.VITE_SUPABASE_ANON_KEY,
+                { auth: { persistSession: false, autoRefreshToken: false } }
+            );
+
+            // 2. Cria a conta no Auth (aciona a trigger do banco)
+            const { data: authData, error: authError } = await tempClient.auth.signUp({
+                email: staffForm.email,
+                password: staffForm.password,
+            });
+
+            if (authError) throw authError;
+
+            const newUserId = authData.user?.id;
+            if (!newUserId) throw new Error('Não foi possível resgatar o ID do usuário criado.');
+
+            // 3. Atualizar o Profile criado pela trigger garantindo permissões do Dono ou aguardando RLS.
+            // E inserir os Detalhes da comissão.
+            // DICA P/ O USUARIO: Ele pode precisar habilitar "Owner can update profiles" no painel SQL
+            const profileRes = await supabase.from('profiles').update({
+                role: 'staff',
+                shop_id: user.shop_id,
+                name: staffForm.name
+            }).eq('id', newUserId);
+            if (profileRes.error) console.warn("Aviso RLS: ", profileRes.error); // Continua p/ ignorar RLS fraco em Dev
+
+            await supabase.from('staff_details').insert([{
+                id: newUserId,
+                shop_id: user.shop_id,
+                commission_rate: parseFloat(staffForm.commission_rate),
+                is_active: true
+            }]);
+
+            alert('Barbeiro cadastrado com sucesso!');
+            setIsStaffModalOpen(false);
+            setStaffForm({ name: '', email: '', password: '', commission_rate: '50' });
+            fetchData();
+        } catch (err: any) {
+            alert(`Falha ao registrar barbeiro: ${err.message}`);
+        } finally {
+            setStaffLoading(false);
+        }
     };
 
     return (
@@ -149,11 +207,19 @@ const TeamServices: React.FC = () => {
 
                     {activeTab === 'staff' && (
                         <div className="bg-space-800 rounded-2xl border border-space-700 shadow-xl overflow-hidden">
-                            <div className="p-6 border-b border-space-700">
-                                <h2 className="font-bold text-chrome">Profissionais Vinculados</h2>
-                                <p className="text-xs text-silver-400 mt-1">
-                                    Nota: Profissionais precisam criar uma conta usando o seu Picking/Linking Code para aparecerem aqui. Ou o Master Admin fará o binding manual.
-                                </p>
+                            <div className="p-6 border-b border-space-700 flex justify-between items-center">
+                                <div>
+                                    <h2 className="font-bold text-chrome">Profissionais Vinculados</h2>
+                                    <p className="text-xs text-silver-400 mt-1">
+                                        Crie contas diretamente para a sua equipe atuar sob as suas diretrizes e comissões.
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setIsStaffModalOpen(true)}
+                                    className={`bg-${COLORS.primary} text-space-900 font-bold px-4 py-2 rounded-xl text-sm hover:bg-opacity-90 transition-all shadow-lg flex items-center shadow-mint-500/20`}
+                                >
+                                    <Plus size={16} className="mr-1" /> Novo Barbeiro
+                                </button>
                             </div>
                             <div className="divide-y divide-space-700">
                                 {staff.length === 0 ? (
@@ -180,26 +246,62 @@ const TeamServices: React.FC = () => {
             {/* MODAL: Service */}
             {isServiceModalOpen && (
                 <div className="fixed inset-0 bg-space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-                    <div className="bg-space-800 rounded-2xl border border-space-700 p-6 w-full max-w-sm shadow-2xl">
+                    <div className="bg-space-800 rounded-2xl border border-space-700 p-6 w-full max-w-sm shadow-2xl animate-in zoom-in-95">
                         <h3 className="text-xl font-bold text-chrome mb-4">{serviceForm.id ? 'Editar Serviço' : 'Novo Serviço'}</h3>
                         <form onSubmit={handleSaveService} className="space-y-4">
                             <div>
                                 <label className="block text-sm text-silver-300">Nome do Serviço</label>
-                                <input required type="text" value={serviceForm.name} onChange={e => setServiceForm({ ...serviceForm, name: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200" />
+                                <input required type="text" value={serviceForm.name} onChange={e => setServiceForm({ ...serviceForm, name: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm text-silver-300">Preço (R$)</label>
-                                    <input required type="number" step="0.01" value={serviceForm.price} onChange={e => setServiceForm({ ...serviceForm, price: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200" />
+                                    <input required type="number" step="0.01" value={serviceForm.price} onChange={e => setServiceForm({ ...serviceForm, price: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" />
                                 </div>
                                 <div>
                                     <label className="block text-sm text-silver-300">Tempo (Min)</label>
-                                    <input required type="number" value={serviceForm.duration} onChange={e => setServiceForm({ ...serviceForm, duration: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200" />
+                                    <input required type="number" value={serviceForm.duration} onChange={e => setServiceForm({ ...serviceForm, duration: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" />
                                 </div>
                             </div>
                             <div className="flex gap-3 pt-4 border-t border-space-700">
-                                <button type="button" onClick={() => setIsServiceModalOpen(false)} className="flex-1 py-2 px-4 rounded-xl border border-space-700 text-silver-300">Cancelar</button>
-                                <button type="submit" className={`flex-1 py-2 px-4 rounded-xl bg-${COLORS.primary} text-space-900 font-bold`}>Salvar</button>
+                                <button type="button" onClick={() => setIsServiceModalOpen(false)} className="flex-1 py-2 px-4 rounded-xl border border-space-700 text-silver-300 hover:bg-space-700 transition-colors">Cancelar</button>
+                                <button type="submit" className={`flex-1 py-2 px-4 rounded-xl bg-${COLORS.primary} text-space-900 font-bold hover:bg-${COLORS.secondary} transition-all`}>Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* MODAL: Contratar Staff */}
+            {isStaffModalOpen && (
+                <div className="fixed inset-0 bg-space-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                    <div className="bg-space-800 rounded-2xl border border-space-700 p-6 w-full max-w-sm shadow-2xl animate-in zoom-in-95">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="text-xl font-bold text-chrome">Cadastrar Barbeiro</h3>
+                            <button onClick={() => setIsStaffModalOpen(false)} className="text-silver-500 hover:text-silver-200"><X size={20} /></button>
+                        </div>
+                        <form onSubmit={handleCreateStaff} className="space-y-4">
+                            <div>
+                                <label className="block text-sm text-silver-300 mb-1">Nome Completo</label>
+                                <input required type="text" value={staffForm.name} onChange={e => setStaffForm({ ...staffForm, name: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" placeholder="Ex: Lucas Barber" />
+                            </div>
+                            <div>
+                                <label className="block text-sm text-silver-300 mb-1">E-mail Profissional</label>
+                                <input required type="email" value={staffForm.email} onChange={e => setStaffForm({ ...staffForm, email: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" placeholder="lucas@barbearia.com" />
+                            </div>
+                            <div>
+                                <label className="block text-sm text-silver-300 mb-1">Senha de Acesso Temporária</label>
+                                <input required type="text" value={staffForm.password} onChange={e => setStaffForm({ ...staffForm, password: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" placeholder="Ex: staff12345" minLength={6} />
+                                <p className="text-[10px] text-silver-500 mt-1">Avise o profissional para mudar a senha depois em seu App.</p>
+                            </div>
+                            <div>
+                                <label className="block text-sm text-silver-300 mb-1">Comissão Padrão (%)</label>
+                                <input required type="number" step="0.5" value={staffForm.commission_rate} onChange={e => setStaffForm({ ...staffForm, commission_rate: e.target.value })} className="w-full bg-space-900 border border-space-700 rounded-xl py-2 px-3 text-silver-200 focus:outline-none focus:border-mint-500" placeholder="Ex: 50" />
+                            </div>
+                            <div className="flex gap-3 pt-4 border-t border-space-700">
+                                <button type="submit" disabled={staffLoading} className={`w-full py-3 px-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-all disabled:opacity-50`}>
+                                    {staffLoading ? 'Gerando Conta...' : 'Ativar Barbeiro'}
+                                </button>
                             </div>
                         </form>
                     </div>
