@@ -6,10 +6,23 @@
   .bg-chrome {
     background: linear-gradient(135deg, #F3F4F6 0%, #D1D5DB 50%, #9CA3AF 100%);
   }
-  
+
   .text-chrome {
-    color: #E5E7EB; /* Failsafe solid color */
+    color: #E5E7EB;
+    /* Failsafe solid color */
     background: linear-gradient(135deg, #F3F4F6 0%, #D1D5DB 50%, #9CA3AF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #FDE047 0%, #D4AF37 50%, #B8860B 100%);
+  }
+
+  .text-gold {
+    color: #D4AF37;
+    background: linear-gradient(135deg, #FDE047 0%, #D4AF37 50%, #B8860B 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
