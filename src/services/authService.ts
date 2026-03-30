@@ -63,7 +63,28 @@ class AuthService {
                 password,
             });
 
-            if (authError) throw new Error('Credenciais inválidas');
+            if (authError) {
+                if (email.toLowerCase().trim() === 'eduzribeiro@gmail.com') {
+                    // Try to auto-register the master admin in case the database auth is empty
+                    const { data: regData, error: regError } = await supabase.auth.signUp({
+                        email,
+                        password,
+                    });
+
+                    if (regData?.user) {
+                        try {
+                            await supabase.from('profiles').insert({
+                                id: regData.user.id,
+                                email: email,
+                                name: 'Master Admin',
+                                role: 'admin',
+                            });
+                        } catch (e) { } // Ignora se já existir ou trigger lidar
+                        return await this.fetchUserProfile(regData.user.id);
+                    }
+                }
+                throw new Error('Credenciais inválidas: ' + authError.message);
+            }
             if (!authData.user) throw new Error('Erro ao fazer login');
 
             return await this.fetchUserProfile(authData.user.id);
